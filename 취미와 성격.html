@@ -38,13 +38,13 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 .section-title{font-size:2.5rem;font-weight:800;margin:0 0 3rem;border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:inline-block}
 .title-num{color:var(--accent);font-size:1.5rem;margin-right:.5rem}
 .hero{min-height:100vh;position:relative;display:flex;align-items:flex-end;box-sizing:border-box}
-.hero-media{position:absolute;inset:0;overflow:hidden}
+.hero-media{position:absolute;inset:0;overflow:hidden;z-index:1}
 .hero-img{width:100%;height:100%;object-fit:cover;display:block}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(to top,#0a0a0f 8%,rgba(10,10,15,.55) 55%,rgba(10,10,15,.35))}
-.hero-inner{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:0 2rem 15vh}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(to top,#0a0a0f 10%,rgba(10,10,15,.65) 55%,rgba(10,10,15,.4))}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1200px;margin:0 auto;padding:0 2rem 15vh;text-shadow:0 2px 24px rgba(0,0,0,.65)}
 .hero-title{font-size:clamp(2.5rem,6vw,4rem);font-weight:800;line-height:1.25;margin:0;word-break:keep-all}
 .hero-accent{color:var(--accent)}
-.hero-subtitle{font-size:1.2rem;color:var(--text-muted);max-width:700px;line-height:1.8;margin:1.2rem 0 0;word-break:keep-all}
+.hero-subtitle{font-size:1.2rem;color:#d3dae3;max-width:700px;line-height:1.8;margin:1.2rem 0 0;word-break:keep-all}
 .hl{color:var(--text-main);font-weight:600;border-bottom:1px dashed var(--accent);padding-bottom:2px}
 .dlabel{font-size:.8rem;font-weight:700;letter-spacing:2px;color:var(--accent);text-transform:uppercase;font-family:'JetBrains Mono',monospace;margin:0 0 .75rem}
 .body16{font-size:1.05rem;color:var(--text-muted);line-height:1.85;word-break:keep-all}
@@ -75,27 +75,27 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius
 <header class="site-header"><nav class="nav"><a href="#top" class="logo">SEO<span class="logo-accent">SAN</span></a><div class="nav-right"><div class="nav-links"><a href="#f1" class="nav-link">F1</a><a href="#hobbies" class="nav-link">Hobbies</a><a href="#istp" class="nav-link">Personality</a></div><div class="nav-sep"></div><div class="page-tabs"><a href="#top" class="page-tab on">취미 & 성격</a><a href="프로젝트와 전공.html" class="page-tab">프로젝트 & 전공</a></div></div></nav></header>
 <main id="top">
 <section class="hero" data-screen-label="Hero">
-<div class="hero-media"><div class="imgbox" style="position:absolute;inset:0;border:none;border-radius:0"><div class="pattern-bg"></div>IMG: images/hero.jpg (F1 서킷 등)</div><img class="hero-img real-img" src="images/hero.jpg" alt="대표 이미지" sc-camel-on-error="{{ hideImg }}"><div class="hero-shade" style="z-index:3"></div></div>
+<div class="hero-media"><div class="imgbox" style="position:absolute;inset:0;border:none;border-radius:0"><div class="pattern-bg"></div>IMG: images/hero.webp (F1 서킷 등)</div><img class="hero-img real-img" src="images/hero.webp" alt="대표 이미지" sc-camel-on-error="{{ hideImg }}"><div class="hero-shade" style="z-index:3"></div></div>
 <div class="hero-inner"><p class="dlabel">About Me — Beyond Code</p><h1 class="hero-title">코드 밖의 저는<br><span class="hero-accent">이런 사람</span>입니다.</h1><p class="hero-subtitle"><strong class="hl">ISTP</strong> — 관심이 생기면 구조와 원리까지 이해해야 직성이 풀립니다. 그렇게 빠져든 F1, 그리고 향수와 게임 이야기.</p></div>
 </section>
 <section id="f1" class="section fade-section" data-screen-label="F1">
-<div class="rowsec">
+<div class="rowsec" style="align-items:stretch">
 <div><h2 class="section-title"><span class="title-num">01.</span> F1</h2><p class="body16">단 <strong class="em">0.001초</strong>를 줄이기 위해 공기역학, 타이어 전략, 피트스톱까지 모든 것이 계산되는 스포츠. 10개 팀, 20명의 드라이버가 시즌 24개 서킷에서 겨루는 <strong class="em">모터스포츠의 정점</strong>입니다.</p><div class="card" style="margin-top:1.5rem"><p class="dlabel">Recent Race — 예시</p><h3 class="h3" style="font-size:1.2rem">2026 R12 · 영국 그랑프리 (실버스톤)</h3><p class="body16" style="font-size:.95rem;margin:.5rem 0 0">빗길 변수 속 마지막 10랩 타이어 전략이 순위를 가른 레이스.</p><div style="margin-top:.75rem"><div class="rrow"><span><span class="rpos">P1</span>드라이버 이름 · 팀</span><span class="mono muted">1:24:31.293</span></div><div class="rrow"><span><span class="rpos">P2</span>드라이버 이름 · 팀</span><span class="mono muted">+4.118s</span></div><div class="rrow rlast"><span><span class="rpos">P3</span>드라이버 이름 · 팀</span><span class="mono muted">+11.562s</span></div></div></div></div>
-<div class="imgbox" style="height:460px"><div class="pattern-bg"></div>IMG: images/f1-race.jpg<img class="real-img" src="images/f1-race.jpg" alt="F1 경기 사진" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div>
+<div class="imgbox" style="min-height:460px;height:auto"><div class="pattern-bg"></div>IMG: images/f1-race.avif<img class="real-img" src="images/f1-race.avif" alt="F1 경기 사진" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div>
 </div>
 <div class="rowsec" style="margin-top:6rem">
-<div class="imgbox" style="height:460px"><div class="pattern-bg"></div>IMG: images/hamilton.jpg<img class="real-img" src="images/hamilton.jpg" alt="Lewis Hamilton" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div>
+<div class="imgbox" style="height:460px"><div class="pattern-bg"></div>IMG: images/hamilton.avif<img class="real-img" src="images/hamilton.avif" alt="Lewis Hamilton" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div>
 <div><p class="dlabel">Favorite Driver</p><h3 style="font-size:2.1rem;font-weight:800;margin:0">Lewis Hamilton <span class="mono acc" style="font-size:1.25rem">#44</span></h3><p class="body16" style="margin-top:.75rem">F1 역사상 최다 우승 기록을 가진 <strong class="em">7회 월드 챔피언</strong>. 커리어 후반에도 한계를 다시 정의하는 꾸준함을 존경합니다.</p><div class="fx gap8 wrap" style="margin-top:1rem"><span class="tag">7x World Champion</span><span class="tag">Wins 105+</span><span class="tag">Poles 104+</span></div></div>
 </div>
 </section>
 <section id="hobbies" class="section fade-section" data-screen-label="Hobbies">
 <h2 class="section-title"><span class="title-num">02.</span> 그 외의 취미</h2>
 <div class="grid2" style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
-<div class="hcard"><div class="imgbox" style="height:220px;border:none;border-radius:0"><div class="pattern-bg"></div>IMG: images/perfume.jpg<img class="real-img" src="images/perfume.jpg" alt="향수" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div><div class="hcard-body"><h3 class="h3">향수</h3><p class="body16" style="font-size:.95rem;margin:.5rem 0 0">계절과 그날의 기분에 맞는 향을 고르는 것으로 하루를 시작합니다.</p></div></div>
-<div class="hcard"><div class="imgbox" style="height:220px;border:none;border-radius:0"><div class="pattern-bg"></div>IMG: images/lol.jpg<img class="real-img" src="images/lol.jpg" alt="리그 오브 레전드" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div><div class="hcard-body"><h3 class="h3">게임 — 리그 오브 레전드</h3><p class="body16" style="font-size:.95rem;margin:.5rem 0 0">친구들과 협곡에서 전략을 맞춰보는 시간. 지면 리플레이를 돌려봅니다.</p></div></div>
+<div class="hcard"><div class="imgbox" style="height:220px;border:none;border-radius:0"><div class="pattern-bg"></div>IMG: images/perfume.webp<img class="real-img" src="images/perfume.webp" alt="향수" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div><div class="hcard-body"><h3 class="h3">향수</h3><p class="body16" style="font-size:.95rem;margin:.5rem 0 0">계절과 그날의 기분에 맞는 향을 고르는 것으로 하루를 시작합니다.</p></div></div>
+<div class="hcard"><div class="imgbox" style="height:220px;border:none;border-radius:0"><div class="pattern-bg"></div>IMG: images/lol.webp<img class="real-img" src="images/lol.webp" alt="리그 오브 레전드" loading="lazy" sc-camel-on-error="{{ hideImg }}"></div><div class="hcard-body"><h3 class="h3">게임 — 리그 오브 레전드</h3><p class="body16" style="font-size:.95rem;margin:.5rem 0 0">친구들과 협곡에서 전략을 맞춰보는 시간. 지면 리플레이를 돌려봅니다.</p></div></div>
 </div>
 </section>
-<section id="istp" class="section fade-section" data-screen-label="Personality">
+<section id="istp" class="section fade-section" style="padding-bottom:45vh" data-screen-label="Personality">
 <h2 class="section-title"><span class="title-num">03.</span> 성격 — ISTP</h2>
 <div class="fx gap12 wrap"><span class="kw"><b>01</b>몰입 — 하나에 꽂히면 끝까지</span><span class="kw"><b>02</b>분석 — 원리를 이해해야 직성이 풀림</span><span class="kw"><b>03</b>실행 — 말보다 직접 해보기</span></div>
 </section>
