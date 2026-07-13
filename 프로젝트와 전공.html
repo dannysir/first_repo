@@ -1,173 +1,186 @@
 <!DOCTYPE html>
-<html>
+<html class="scroll-smooth">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
 </head>
-<body>
+<body class="m-0 overflow-x-hidden bg-[#0a0a0f] p-0 font-sans leading-[1.6] text-main">
 <x-dc>
 <helmet data-dc-atomics>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
-<style>
-html{scroll-behavior:smooth;background:#0a0a0f;color:#f8fafc;font-family:'Pretendard',sans-serif;line-height:1.6;--bg-surface:#14141c;--text-main:#f8fafc;--text-muted:#94a3b8;--accent:#33d6e4;--accent-glow:color-mix(in srgb,var(--accent) 20%,transparent);--accent-soft:color-mix(in srgb,var(--accent) 6%,transparent);--border-color:#272732}
-body{margin:0;padding:0;overflow-x:hidden}
-a{color:var(--accent)}a:hover{color:var(--text-main)}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.skip-link{position:absolute;left:-9999px;top:0;z-index:2000;background:var(--accent);color:#0a0a0f;padding:.6rem 1.2rem;border-radius:0 0 8px 0;font-weight:700;text-decoration:none}
-.skip-link:focus{left:0}
-.mono{font-family:'JetBrains Mono',monospace;color:var(--text-main);font-size:.9em;background:rgba(255,255,255,.06);padding:.1em .4em;border-radius:4px;border:1px solid rgba(255,255,255,.1)}
-.em{color:var(--text-main);font-weight:600}
-.site-header{position:fixed;top:0;left:0;width:100%;height:70px;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border-color);z-index:1000;display:flex;align-items:center;justify-content:center}
-.nav{width:100%;max-width:1200px;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:800;font-size:1.25rem;color:var(--text-main);text-decoration:none;letter-spacing:1.5px}
-.logo-accent{color:var(--accent)}
-.nav-right{display:flex;align-items:center;gap:2rem}
-.nav-links{display:flex;gap:2rem}
-.nav-link{color:var(--text-muted);text-decoration:none;font-weight:500;font-size:.95rem;transition:color .3s;position:relative}
-.nav-link:hover,.nav-link.active{color:var(--accent)}
-.nav-link::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s}
-.nav-link:hover::after,.nav-link.active::after{width:100%}
-.nav-sep{width:1px;height:22px;background:var(--border-color)}
-.page-tabs{display:flex;gap:.5rem}
-.page-tab{color:var(--text-muted);text-decoration:none;font-weight:600;font-size:.9rem;padding:.4rem .9rem;border-radius:8px;border:1px solid transparent;transition:all .3s}
-.page-tab:hover{color:var(--text-main)}
-.page-tab.on{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 35%,transparent);background:color-mix(in srgb,var(--accent) 7%,transparent)}
-.fade-section{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-.fade-section.in-view{opacity:1;transform:none}
-.section{padding:110px 2rem;max-width:1200px;margin:0 auto;scroll-margin-top:70px}
-.section-title{font-size:2.5rem;font-weight:800;margin:0 0 3rem;border-bottom:1px solid var(--border-color);padding-bottom:1rem;display:inline-block}
-.title-num{color:var(--accent);font-size:1.5rem;margin-right:.5rem}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-top:70px;position:relative;box-sizing:border-box}
-.hero-title{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:800;line-height:1.2;margin:0 0 1.5rem;word-break:keep-all}
-.hero-accent{color:var(--accent)}
-.hero-subtitle{font-size:1.2rem;color:var(--text-muted);max-width:780px;line-height:1.8;margin:0 0 2.5rem;word-break:keep-all;opacity:0;transform:translateY(16px);animation:fadeUp .6s .15s forwards ease-out}
-.hl{color:var(--text-main);font-weight:600;border-bottom:1px dashed var(--accent);padding-bottom:2px}
-.metric-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(20,20,28,.8);border:1px solid var(--border-color);padding:.5rem 1rem;border-radius:30px;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text-main);margin-top:1rem;opacity:0;animation:fadeIn .8s .5s forwards}
-.metric-num{color:var(--accent);font-weight:700}
-.scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--text-muted);font-size:.8rem;letter-spacing:2px;opacity:0;animation:fadeIn 1s 1s forwards}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollDown 2s infinite}
-.projects-track{position:relative}
-.projects-stage{position:sticky;top:70px;height:calc(100vh - 70px);overflow:hidden}
-.project-slide{position:absolute;top:4rem;left:0;right:0;bottom:0;display:flex;gap:4rem;opacity:0;pointer-events:none}
-.stage-title{position:relative;z-index:5;margin:1.5rem 0 0}
-.project-slide.on{opacity:1;pointer-events:auto}
-.project-visual{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;min-width:0}
-.project-image-box{width:100%;aspect-ratio:16/10;max-height:44vh;background:var(--bg-surface);border:1px solid var(--border-color);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;margin-bottom:1.5rem}
-.project-image{display:block;width:100%;height:100%;object-fit:cover;z-index:2;transition:transform .4s ease}
-.project-image-box:hover .project-image{transform:scale(1.03)}
-.pattern-bg{position:absolute;inset:0;background-image:linear-gradient(var(--border-color) 1px,transparent 1px),linear-gradient(90deg,var(--border-color) 1px,transparent 1px);background-size:20px 20px;opacity:.25;z-index:1}
-.fallback-icon{position:absolute;width:70px;height:70px;color:var(--accent);z-index:1;filter:drop-shadow(0 0 8px var(--accent-glow))}
-.project-title{font-size:1.8rem;font-weight:800;margin:0 0 .5rem;color:var(--text-main);word-break:keep-all}
-.project-role{color:var(--text-muted);font-size:.95rem;margin-bottom:1rem}
-.tech-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
-.tech-tag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--text-muted);padding:.2rem .6rem;border-radius:4px;font-size:.8rem;font-family:'JetBrains Mono',monospace}
-.project-links{display:flex;gap:1rem}
-.btn-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--accent);text-decoration:none;font-size:.85rem;font-family:'JetBrains Mono',monospace;border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);padding:.4rem .8rem;border-radius:6px;background:var(--accent-soft);transition:all .3s ease}
-.btn-link:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);box-shadow:0 0 10px var(--accent-glow);color:var(--accent)}
-.project-details{flex:1.2;min-width:0;position:relative}
-.details-inner{height:100%}
-.detail-block{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);margin-bottom:2.75rem}
-.detail-block.active{opacity:1;transform:none}
-@media (min-width:969px){.projects-stage .detail-block{position:absolute;left:0;right:0;top:30%;margin:0;opacity:0;transform:translateY(26px);transition:opacity .45s ease,transform .45s ease}.projects-stage .detail-block.current{opacity:1;transform:none}}
-.detail-label{font-size:.8rem;font-weight:700;letter-spacing:2px;color:var(--accent);margin:0 0 .75rem;text-transform:uppercase;font-family:'JetBrains Mono',monospace}
-.detail-content{font-size:1.05rem;color:var(--text-muted);line-height:1.8;word-break:keep-all}
-.detail-list{margin:.75rem 0 0;padding-left:1.2rem;color:var(--text-muted)}
-.detail-list li{margin-bottom:.5rem;font-size:.95rem}
-.proj-dots{position:absolute;top:2.7rem;right:0;display:flex;align-items:center;gap:1.4rem;z-index:20}
-.proj-dot{background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:.2rem 0;font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:1px;color:var(--text-muted);transition:all .3s}
-.proj-dot:hover{color:var(--text-main)}
-.proj-dot.active{color:var(--accent);border-bottom-color:var(--accent);text-shadow:0 0 12px var(--accent-glow)}
-.contact{text-align:center}
-.contact-links{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin-top:.75rem}
-.contact-card{background:var(--bg-surface);border:1px solid var(--border-color);padding:1.5rem 2.5rem;border-radius:12px;text-decoration:none;color:var(--text-main);transition:all .3s ease;display:flex;flex-direction:column;align-items:center;gap:.75rem;min-width:140px}
-.contact-card:hover{border-color:var(--accent);box-shadow:0 10px 30px var(--accent-glow);transform:translateY(-5px);color:var(--text-main)}
-.cicon{width:28px;height:28px;color:var(--text-muted);transition:color .3s}
-.contact-card:hover .cicon{color:var(--accent)}
-.contact-name{font-size:.95rem;font-weight:500}
-.contact-val{font-size:.8rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace}
-.site-footer{text-align:center;padding:2.5rem;border-top:1px solid var(--border-color);color:var(--text-muted);font-size:.9rem}
-@media (max-width:1180px){.project-slide{gap:2.5rem}}
-@media (max-width:968px){.section{padding:90px 1.5rem}.projects-track{height:auto!important}.projects-stage{position:static;height:auto;overflow:visible}.project-slide{position:static;opacity:1!important;transform:none!important;pointer-events:auto;flex-direction:column;gap:2rem;margin-bottom:8vh}.project-details{overflow:visible;-webkit-mask-image:none;mask-image:none}.details-inner{transform:none!important;padding:0}.project-image-box{max-height:none}.detail-block{margin-bottom:2rem}.proj-dots{display:none}.hero-title{font-size:2.2rem}.contact-links{flex-direction:column;align-items:stretch}.contact-card{flex-direction:row;justify-content:space-between;padding:1.2rem 2rem}.nav-links{display:none}}
-@keyframes fadeUp{to{opacity:1;transform:none}}
-@keyframes fadeIn{to{opacity:1}}
-@keyframes scrollDown{0%{transform:translateY(-10px) scaleY(.5);opacity:0}50%{transform:translateY(0) scaleY(1);opacity:1}100%{transform:translateY(10px) scaleY(.5);opacity:0}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}.fade-section,.detail-block,.hero-subtitle,.metric-badge,.scroll-indicator{opacity:1;transform:none}}
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+@theme inline {
+  --color-accent: var(--accent);
+}
+@theme {
+  --color-surface: #14141c;
+  --color-main: #f8fafc;
+  --color-muted: #94a3b8;
+  --color-line: #272732;
+  --font-sans: "Pretendard", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+@layer base {
+  html {
+    --accent: #33d6e4;
+    --accent-glow: color-mix(in srgb, var(--accent) 20%, transparent);
+    --accent-soft: color-mix(in srgb, var(--accent) 6%, transparent);
+  }
+  a { color: var(--accent); }
+  a:hover { color: #f8fafc; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+}
+@layer components {
+  /* ── JS(IntersectionObserver / scroll)가 토글하는 상태 클래스 ── */
+  .fade-section { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-section.in-view { opacity: 1; transform: none; }
+
+  /* ── 반복 패턴 컴포넌트 ── */
+  .pattern-bg {
+    position: absolute; inset: 0; z-index: 1;
+    background-image: linear-gradient(#272732 1px, transparent 1px), linear-gradient(90deg, #272732 1px, transparent 1px);
+    background-size: 20px 20px; opacity: .25;
+  }
+  .chip { font-family: "JetBrains Mono", monospace; color: #f8fafc; font-size: .9em; background: rgba(255,255,255,.06); padding: .1em .4em; border-radius: 4px; border: 1px solid rgba(255,255,255,.1); }
+  .detail-list { margin: .75rem 0 0; padding-left: 1.2rem; color: #94a3b8; }
+  .detail-list li { margin-bottom: .5rem; font-size: .95rem; }
+
+  /* ── 진입 애니메이션 ── */
+  .anim-up { opacity: 0; transform: translateY(16px); animation: fadeUp .6s .15s forwards ease-out; }
+  .anim-in-1 { opacity: 0; animation: fadeIn .8s .5s forwards; }
+  .anim-in-2 { opacity: 0; animation: fadeIn 1s 1s forwards; }
+  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollDown 2s infinite; }
+
+  /* ── 프로젝트 스크롤리텔링 (JS가 opacity/transform/높이를 직접 제어) ── */
+  .projects-track { position: relative; }
+  .projects-stage { position: sticky; top: 70px; height: calc(100vh - 70px); overflow: hidden; }
+  .project-slide { position: absolute; top: 4rem; left: 0; right: 0; bottom: 0; display: flex; gap: 4rem; opacity: 0; pointer-events: none; }
+  .project-slide.on { opacity: 1; pointer-events: auto; }
+  .detail-block { opacity: 0; transform: translateY(16px); transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); margin-bottom: 2.75rem; }
+  .detail-block.active { opacity: 1; transform: none; }
+  @media (min-width: 969px) {
+    .projects-stage .detail-block { position: absolute; left: 0; right: 0; top: var(--detail-top, 30%); margin: 0; opacity: 0; transform: translateY(26px); transition: opacity .45s ease, transform .45s ease; }
+    .projects-stage .detail-block.current { opacity: 1; transform: none; }
+  }
+  .proj-dots { position: absolute; top: 2.7rem; right: 0; display: flex; align-items: center; gap: 1.4rem; z-index: 20; }
+  .proj-dot { background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; padding: .2rem 0; font-family: "JetBrains Mono", monospace; font-size: .85rem; letter-spacing: 1px; color: #94a3b8; transition: all .3s; }
+  .proj-dot:hover { color: #f8fafc; }
+  .proj-dot.active { color: var(--accent); border-bottom-color: var(--accent); text-shadow: 0 0 12px var(--accent-glow); }
+  @media (max-width: 1180px) { .project-slide { gap: 2.5rem; } }
+  @media (max-width: 968px) {
+    .projects-track { height: auto !important; }
+    .projects-stage { position: static; height: auto; overflow: visible; }
+    .project-slide { position: static; opacity: 1 !important; transform: none !important; pointer-events: auto; flex-direction: column; gap: 2rem; margin-bottom: 8vh; }
+    .project-details { overflow: visible; -webkit-mask-image: none; mask-image: none; }
+    .details-inner { transform: none !important; padding: 0; }
+    .detail-block { margin-bottom: 2rem; }
+    .proj-dots { display: none; }
+  }
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes scrollDown { 0% { transform: translateY(-10px) scaleY(.5); opacity: 0; } 50% { transform: translateY(0) scaleY(1); opacity: 1; } 100% { transform: translateY(10px) scaleY(.5); opacity: 0; } }
+/* JS가 토글하는 nav 활성 상태 — @layer 밖(unlayered)이어야 utilities(text-muted, after:w-0)를 이길 수 있음 */
+.nav-link.active { color: var(--accent); }
+.nav-link.active::after { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+  .fade-section, .detail-block, .anim-up, .anim-in-1, .anim-in-2 { opacity: 1; transform: none; }
+}
 </style>
 </helmet>
-<a class="skip-link" href="#about">본문 바로가기</a>
-<header class="site-header"><nav class="nav"><a href="#about" class="logo">SEO<span class="logo-accent">SAN</span></a><div class="nav-right"><div class="nav-links"><a href="#about" class="nav-link active">About</a><a href="#projects" class="nav-link">Projects</a><a href="#contact" class="nav-link">Contact</a></div><div class="nav-sep"></div><div class="page-tabs"><a href="index.html" class="page-tab">취미 & 성격</a><a href="#about" class="page-tab on">프로젝트 & 전공</a></div></div></nav></header>
+<a class="absolute top-0 -left-[9999px] z-[2000] rounded-br-lg bg-accent px-5 py-2.5 font-bold text-[#0a0a0f] no-underline focus:left-0" href="#about">본문 바로가기</a>
+<header class="fixed top-0 left-0 z-[1000] flex h-[70px] w-full items-center justify-center border-b border-line bg-[rgba(10,10,15,.85)] backdrop-blur-[12px]">
+<nav class="flex w-full max-w-[1200px] items-center justify-between px-8">
+<a href="#about" class="text-xl font-extrabold tracking-[1.5px] text-main no-underline">SEO<span class="text-accent">SAN</span></a>
+<div class="flex items-center gap-8">
+<div class="flex gap-8 max-[968px]:hidden">
+<a href="#about" class="nav-link active relative text-[.95rem] font-medium text-muted no-underline transition-colors duration-300 after:absolute after:-bottom-[5px] after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-[width] after:duration-300 after:content-[''] hover:text-accent hover:after:w-full">About</a>
+<a href="#projects" class="nav-link relative text-[.95rem] font-medium text-muted no-underline transition-colors duration-300 after:absolute after:-bottom-[5px] after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-[width] after:duration-300 after:content-[''] hover:text-accent hover:after:w-full">Projects</a>
+<a href="#contact" class="nav-link relative text-[.95rem] font-medium text-muted no-underline transition-colors duration-300 after:absolute after:-bottom-[5px] after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-[width] after:duration-300 after:content-[''] hover:text-accent hover:after:w-full">Contact</a>
+</div>
+<div class="h-[22px] w-px bg-line"></div>
+<div class="flex gap-2">
+<a href="index.html" class="rounded-lg border border-transparent px-[.9rem] py-[.4rem] text-sm font-semibold text-muted no-underline transition-all duration-300 hover:text-main">취미 &amp; 성격</a>
+<a href="#about" class="rounded-lg border border-accent/[.35] bg-accent/[.07] px-[.9rem] py-[.4rem] text-sm font-semibold text-accent no-underline transition-all duration-300">프로젝트 &amp; 전공</a>
+</div>
+</div>
+</nav>
+</header>
 <main>
-<section id="about" class="section hero fade-section" data-screen-label="About">
-<h1 class="hero-title">파고들고, <span class="hero-accent">움직이는</span> 프론트엔드 개발자.</h1>
-<p class="hero-subtitle">스스로에게 <strong class="hl">"왜?"</strong>라는 질문을 던지는 것으로 성장을 시작합니다.<br>대량의 금융 차트를 렌더링하기 위해 Canvas API를 통제하고, 브라우저 다중 탭 리소스를 아끼고자 Shared Worker 구조를 이식하며, 완성도를 인정받아 npm 패키지를 배포하여 실제 다운로드를 기록하고 있습니다.</p>
-<div class="metric-badge">NPM Library Weekly Downloads: <span class="metric-num">4,800+</span> (Total)</div>
-<sc-if value="{{ showScroll }}" hint-placeholder-val="{{ true }}"><div class="scroll-indicator">SCROLL<div class="scroll-line"></div></div></sc-if>
+<section id="about" class="section fade-section relative mx-auto box-border flex min-h-screen max-w-[1200px] flex-col items-start justify-center scroll-mt-[70px] px-8 py-[110px] pt-[70px] max-[968px]:px-6 max-[968px]:py-[90px]" data-screen-label="About">
+<h1 class="mt-0 mb-6 break-keep text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold leading-[1.2] max-[968px]:text-[2.2rem]">파고들고, <span class="text-accent">움직이는</span> 프론트엔드 개발자.</h1>
+<p class="anim-up mx-0 mt-0 mb-10 max-w-[780px] break-keep text-xl leading-[1.8] text-muted">스스로에게 <strong class="border-b border-dashed border-accent pb-[2px] font-semibold text-main">"왜?"</strong>라는 질문을 던지는 것으로 성장을 시작합니다.<br>대량의 금융 차트를 렌더링하기 위해 Canvas API를 통제하고, 브라우저 다중 탭 리소스를 아끼고자 Shared Worker 구조를 이식하며, 완성도를 인정받아 npm 패키지를 배포하여 실제 다운로드를 기록하고 있습니다.</p>
+<div class="anim-in-1 mt-4 inline-flex items-center gap-2 rounded-[30px] border border-line bg-[rgba(20,20,28,.8)] px-4 py-2 font-mono text-[.9rem] text-main">NPM Library Weekly Downloads: <span class="font-bold text-accent">4,800+</span> (Total)</div>
+<sc-if value="{{ showScroll }}" hint-placeholder-val="{{ true }}"><div class="anim-in-2 absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2.5 text-[.8rem] tracking-[2px] text-muted">SCROLL<div class="scroll-line"></div></div></sc-if>
 </section>
-<section id="projects" class="section fade-section" data-screen-label="Projects">
+<section id="projects" class="section fade-section mx-auto max-w-[1200px] scroll-mt-[70px] px-8 py-[110px] max-[968px]:px-6 max-[968px]:py-[90px]" data-screen-label="Projects">
 <div class="projects-track">
 <div class="projects-stage">
-<h2 class="section-title stage-title"><span class="title-num">01.</span> Projects</h2>
+<h2 class="relative z-[5] mt-6 mb-0 inline-block border-b border-line pb-4 text-[2.5rem] font-extrabold"><span class="mr-2 text-2xl text-accent">01.</span> Projects</h2>
 <div class="project-slide on" data-screen-label="Project: floating-components">
-<div class="project-visual">
-<div class="project-image-box"><div class="pattern-bg"></div><img class="project-image" src="https://github.com/user-attachments/assets/6d2ae844-8c40-4c7a-a879-a856741b3160" alt="floating-components 데모 — 패널을 드래그로 분할·이동·리사이즈하는 화면" loading="lazy" decoding="async" sc-camel-on-error="{{ hideImg }}" sc-camel-on-load="{{ remeasure }}"><svg class="fallback-icon" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg></div>
-<h3 class="project-title">floating-components</h3>
-<span class="project-role">React Layout Library (NPM Package)</span>
-<div class="tech-tags"><span class="tech-tag">React</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Vite</span><span class="tech-tag">Npm package</span></div>
-<div class="project-links"><a href="https://www.npmjs.com/package/@dannysir/floating-components" target="_blank" class="btn-link">NPM Page</a><a href="https://dannysir-labs.vercel.app/en/libraries/floating-components" target="_blank" class="btn-link">Live Demo</a></div>
+<div class="flex min-w-0 flex-1 flex-col items-start justify-center">
+<div class="project-image-box group relative mb-6 flex aspect-[16/10] max-h-[44vh] w-full items-center justify-center overflow-hidden rounded-xl border border-line bg-surface max-[968px]:max-h-none"><div class="pattern-bg"></div><img class="z-[2] block h-full w-full object-cover transition-transform duration-[400ms] group-hover:scale-[1.03]" src="https://github.com/user-attachments/assets/6d2ae844-8c40-4c7a-a879-a856741b3160" alt="floating-components 데모 — 패널을 드래그로 분할·이동·리사이즈하는 화면" loading="lazy" decoding="async" sc-camel-on-error="{{ hideImg }}" sc-camel-on-load="{{ remeasure }}"><svg class="absolute z-[1] h-[70px] w-[70px] text-accent [filter:drop-shadow(0_0_8px_var(--accent-glow))]" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg></div>
+<h3 class="mt-0 mb-2 break-keep text-[1.8rem] font-extrabold text-main">floating-components</h3>
+<span class="mb-4 text-[.95rem] text-muted">React Layout Library (NPM Package)</span>
+<div class="mb-6 flex flex-wrap gap-2"><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">React</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">TypeScript</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Vite</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Npm package</span></div>
+<div class="flex gap-4"><a href="https://www.npmjs.com/package/@dannysir/floating-components" target="_blank" class="inline-flex items-center gap-[.4rem] rounded-md border border-accent/30 bg-[var(--accent-soft)] px-[.8rem] py-[.4rem] font-mono text-[.85rem] text-accent no-underline transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-[0_0_10px_var(--accent-glow)]">NPM Page</a><a href="https://dannysir-labs.vercel.app/en/libraries/floating-components" target="_blank" class="inline-flex items-center gap-[.4rem] rounded-md border border-accent/30 bg-[var(--accent-soft)] px-[.8rem] py-[.4rem] font-mono text-[.85rem] text-accent no-underline transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-[0_0_10px_var(--accent-glow)]">Live Demo</a></div>
 </div>
-<div class="project-details"><div class="details-inner">
-<div class="detail-block"><h4 class="detail-label">Overview</h4><div class="detail-content">VS Code처럼 패널을 드래그로 <strong class="em">분할·이동·리사이즈</strong>할 수 있는 트리 기반 React 레이아웃 라이브러리입니다. 설계부터 구현·배포·버전 관리 전 과정에 AI 에이전트를 적극 활용해 개인의 아이디어를 실제 운영 중인 라이브러리로 만들었으며, <strong class="em">Weekly Downloads 총합 1,500+</strong>를 달성했습니다.</div></div>
-<div class="detail-block"><h4 class="detail-label">트리 기반 레이아웃 설계</h4><div class="detail-content"><ul class="detail-list"><li>중첩 분할 레이아웃을 <span class="mono">N-ary 트리</span> 구조로 설계했습니다.</li><li>렌더링(<span class="mono">TreeLayout</span>)과 상태 관리(<span class="mono">useLayoutTree</span>)를 분리해 독립적으로 사용 가능하도록 설계했습니다.</li><li>트리에 ReactNode를 직접 담으면 저장/복원이 불가능한 문제를 발견, <span class="mono">componentKey</span>와 <span class="mono">ComponentStore</span>를 도입해 JSON 직렬화만으로 레이아웃 저장/복원을 지원합니다.</li></ul></div></div>
-<div class="detail-block"><h4 class="detail-label">드래그 앤 드롭 인터랙션 구현</h4><div class="detail-content"><ul class="detail-list"><li>패널 중앙 / 부모 split 가장자리 / 루트 가장자리를 구분하는 <strong class="em">depth 기반 드롭 타겟 판정</strong>을 구현했습니다.</li><li>커서가 레이아웃 밖 이탈 후 재진입 시 드롭 preview가 복원되지 않는 문제를 preview 초기화·드래그 종료 로직 분리로 해결했습니다.</li></ul></div></div>
-<div class="detail-block"><h4 class="detail-label">터치/펜 입력 지원</h4><div class="detail-content"><ul class="detail-list"><li>마우스 전용 이벤트라 터치 기기에서 동작하지 않던 리사이즈·드래그를 <span class="mono">Pointer Events</span> 기반 단일 경로로 전환, <span class="mono">setPointerCapture</span>와 <span class="mono">pointercancel</span> 처리로 안정성을 확보했습니다.</li><li>터치에서는 롱프레스로 드래그를 시작하고 <span class="mono">elementFromPoint</span>로 드롭 타겟을 판정하는 하이브리드 경로를 구현했습니다.</li><li>hover가 없는 터치 기기에서 리사이저가 보이지 않는 문제를 미디어쿼리(<span class="mono">hover: none</span>)로 해결했습니다.</li></ul></div></div>
+<div class="project-details relative min-w-0 flex-[1.2]"><div class="details-inner h-full">
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">Overview</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted">VS Code처럼 패널을 드래그로 <strong class="font-semibold text-main">분할·이동·리사이즈</strong>할 수 있는 트리 기반 React 레이아웃 라이브러리입니다. 설계부터 구현·배포·버전 관리 전 과정에 AI 에이전트를 적극 활용해 개인의 아이디어를 실제 운영 중인 라이브러리로 만들었으며, <strong class="font-semibold text-main">Weekly Downloads 총합 1,500+</strong>를 달성했습니다.</div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">트리 기반 레이아웃 설계</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>중첩 분할 레이아웃을 <span class="chip">N-ary 트리</span> 구조로 설계했습니다.</li><li>렌더링(<span class="chip">TreeLayout</span>)과 상태 관리(<span class="chip">useLayoutTree</span>)를 분리해 독립적으로 사용 가능하도록 설계했습니다.</li><li>트리에 ReactNode를 직접 담으면 저장/복원이 불가능한 문제를 발견, <span class="chip">componentKey</span>와 <span class="chip">ComponentStore</span>를 도입해 JSON 직렬화만으로 레이아웃 저장/복원을 지원합니다.</li></ul></div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">드래그 앤 드롭 인터랙션 구현</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>패널 중앙 / 부모 split 가장자리 / 루트 가장자리를 구분하는 <strong class="font-semibold text-main">depth 기반 드롭 타겟 판정</strong>을 구현했습니다.</li><li>커서가 레이아웃 밖 이탈 후 재진입 시 드롭 preview가 복원되지 않는 문제를 preview 초기화·드래그 종료 로직 분리로 해결했습니다.</li></ul></div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">터치/펜 입력 지원</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>마우스 전용 이벤트라 터치 기기에서 동작하지 않던 리사이즈·드래그를 <span class="chip">Pointer Events</span> 기반 단일 경로로 전환, <span class="chip">setPointerCapture</span>와 <span class="chip">pointercancel</span> 처리로 안정성을 확보했습니다.</li><li>터치에서는 롱프레스로 드래그를 시작하고 <span class="chip">elementFromPoint</span>로 드롭 타겟을 판정하는 하이브리드 경로를 구현했습니다.</li><li>hover가 없는 터치 기기에서 리사이저가 보이지 않는 문제를 미디어쿼리(<span class="chip">hover: none</span>)로 해결했습니다.</li></ul></div></div>
 </div></div>
 </div>
 <div class="project-slide" data-screen-label="Project: Js-Te">
-<div class="project-visual">
-<div class="project-image-box"><div class="pattern-bg"></div><img class="project-image" src="https://github.com/user-attachments/assets/3d087a61-cc44-4f5b-8a2f-efd5f15c12b7" alt="Js-Te 테스트 실행 결과 출력 화면" loading="lazy" decoding="async" sc-camel-on-error="{{ hideImg }}" sc-camel-on-load="{{ remeasure }}"><svg class="fallback-icon" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
-<h3 class="project-title">Js-Te</h3>
-<span class="project-role">JavaScript Testing Library (NPM Package)</span>
-<div class="tech-tags"><span class="tech-tag">JavaScript</span><span class="tech-tag">Babel Compiler</span><span class="tech-tag">Rollup</span><span class="tech-tag">Npm package</span></div>
-<div class="project-links"><a href="https://www.npmjs.com/package/@dannysir/js-te" target="_blank" class="btn-link">NPM Page</a><a href="https://velog.io/@dannysir/series/npm-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0" target="_blank" class="btn-link">Dev Blog</a></div>
+<div class="flex min-w-0 flex-1 flex-col items-start justify-center">
+<div class="project-image-box group relative mb-6 flex aspect-[16/10] max-h-[44vh] w-full items-center justify-center overflow-hidden rounded-xl border border-line bg-surface max-[968px]:max-h-none"><div class="pattern-bg"></div><img class="z-[2] block h-full w-full object-cover transition-transform duration-[400ms] group-hover:scale-[1.03]" src="https://github.com/user-attachments/assets/3d087a61-cc44-4f5b-8a2f-efd5f15c12b7" alt="Js-Te 테스트 실행 결과 출력 화면" loading="lazy" decoding="async" sc-camel-on-error="{{ hideImg }}" sc-camel-on-load="{{ remeasure }}"><svg class="absolute z-[1] h-[70px] w-[70px] text-accent [filter:drop-shadow(0_0_8px_var(--accent-glow))]" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+<h3 class="mt-0 mb-2 break-keep text-[1.8rem] font-extrabold text-main">Js-Te</h3>
+<span class="mb-4 text-[.95rem] text-muted">JavaScript Testing Library (NPM Package)</span>
+<div class="mb-6 flex flex-wrap gap-2"><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">JavaScript</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Babel Compiler</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Rollup</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Npm package</span></div>
+<div class="flex gap-4"><a href="https://www.npmjs.com/package/@dannysir/js-te" target="_blank" class="inline-flex items-center gap-[.4rem] rounded-md border border-accent/30 bg-[var(--accent-soft)] px-[.8rem] py-[.4rem] font-mono text-[.85rem] text-accent no-underline transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-[0_0_10px_var(--accent-glow)]">NPM Page</a><a href="https://velog.io/@dannysir/series/npm-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%A7%8C%EB%93%A4%EA%B8%B0" target="_blank" class="inline-flex items-center gap-[.4rem] rounded-md border border-accent/30 bg-[var(--accent-soft)] px-[.8rem] py-[.4rem] font-mono text-[.85rem] text-accent no-underline transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-[0_0_10px_var(--accent-glow)]">Dev Blog</a></div>
 </div>
-<div class="project-details"><div class="details-inner">
-<div class="detail-block"><h4 class="detail-label">Overview</h4><div class="detail-content">Jest에서 영감을 받아 제작한 JavaScript 테스트 라이브러리입니다. 모킹 기능과 다양한 사용자 환경 지원에 집중했으며, <strong class="em">Weekly Downloads 총합 3,300+</strong>를 달성했습니다.</div></div>
-<div class="detail-block"><h4 class="detail-label">모킹(Mocking) 기능 구현</h4><div class="detail-content"><ul class="detail-list"><li>모듈 모킹에 전체 파일의 import문 수정이 필요했던 문제를 <span class="mono">Babel plugin</span>의 import 구문 조작으로 해결했습니다.</li><li>동적 import 제약 해결을 위한 Wrapper 패턴을 적용했습니다.</li><li>Mock 경로 사전 수집을 통한 선별적 모듈 변환으로 성능을 최적화했습니다.</li></ul></div></div>
-<div class="detail-block"><h4 class="detail-label">다양한 환경 지원</h4><div class="detail-content"><ul class="detail-list"><li>ESM만 지원하던 구조를 <span class="mono">Rollup</span> 기반 dual package 빌드로 <strong class="em">ESM/CommonJS 동시 지원</strong>으로 확장했습니다.</li><li>모듈 경로 작성 방식에 따라 모킹이 작동하지 않는 문제를 Babel 기반 절대 경로 정규화로 해결하고, 사용자 환경에 따른 자동 모듈 선택 로직을 구현했습니다.</li></ul></div></div>
-<div class="detail-block"><h4 class="detail-label">테스트 프레임워크 핵심 기능 구현</h4><div class="detail-content"><ul class="detail-list"><li><span class="mono">test</span> · <span class="mono">describe</span> · <span class="mono">expect</span> 등 Jest와 유사한 API, <span class="mono">beforeEach</span>·<span class="mono">test.each</span> 등 테스트 라이프사이클 훅을 구현했습니다.</li><li>CLI 도구를 통한 자동 테스트 파일 탐색 및 실행을 지원합니다.</li></ul></div></div>
+<div class="project-details relative min-w-0 flex-[1.2]"><div class="details-inner h-full">
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">Overview</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted">Jest에서 영감을 받아 제작한 JavaScript 테스트 라이브러리입니다. 모킹 기능과 다양한 사용자 환경 지원에 집중했으며, <strong class="font-semibold text-main">Weekly Downloads 총합 3,300+</strong>를 달성했습니다.</div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">모킹(Mocking) 기능 구현</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>모듈 모킹에 전체 파일의 import문 수정이 필요했던 문제를 <span class="chip">Babel plugin</span>의 import 구문 조작으로 해결했습니다.</li><li>동적 import 제약 해결을 위한 Wrapper 패턴을 적용했습니다.</li><li>Mock 경로 사전 수집을 통한 선별적 모듈 변환으로 성능을 최적화했습니다.</li></ul></div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">다양한 환경 지원</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>ESM만 지원하던 구조를 <span class="chip">Rollup</span> 기반 dual package 빌드로 <strong class="font-semibold text-main">ESM/CommonJS 동시 지원</strong>으로 확장했습니다.</li><li>모듈 경로 작성 방식에 따라 모킹이 작동하지 않는 문제를 Babel 기반 절대 경로 정규화로 해결하고, 사용자 환경에 따른 자동 모듈 선택 로직을 구현했습니다.</li></ul></div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">테스트 프레임워크 핵심 기능 구현</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li><span class="chip">test</span> · <span class="chip">describe</span> · <span class="chip">expect</span> 등 Jest와 유사한 API, <span class="chip">beforeEach</span>·<span class="chip">test.each</span> 등 테스트 라이프사이클 훅을 구현했습니다.</li><li>CLI 도구를 통한 자동 테스트 파일 탐색 및 실행을 지원합니다.</li></ul></div></div>
 </div></div>
 </div>
 <div class="project-slide" data-screen-label="Project: JuGa">
-<div class="project-visual">
-<div class="project-image-box"><div class="pattern-bg"></div><img class="project-image" src="https://github.com/user-attachments/assets/ce214616-8f2a-4017-b9db-001c818d4cc0" alt="JuGa 실시간 주식 차트 화면" loading="lazy" decoding="async" sc-camel-on-error="{{ hideImg }}" sc-camel-on-load="{{ remeasure }}"><svg class="fallback-icon" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
-<h3 class="project-title">JuGa (주식 모의 투자 서비스)</h3>
-<span class="project-role">Real-time Stock Simulation Service (Team Project)</span>
-<div class="tech-tags"><span class="tech-tag">TypeScript</span><span class="tech-tag">React</span><span class="tech-tag">Canvas API</span><span class="tech-tag">Socket.io</span><span class="tech-tag">Shared Worker</span></div>
-<div class="project-links"><a href="https://github.com/boostcampwm-2024/web16-JuGa" target="_blank" class="btn-link">GitHub</a><a href="https://velog.io/@dannysir/Shared-Worker%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%86%8C%EC%BC%93-%EC%97%B0%EA%B2%B0-%EA%B4%80%EB%A6%AC" target="_blank" class="btn-link">Optimization Log</a></div>
+<div class="flex min-w-0 flex-1 flex-col items-start justify-center">
+<div class="project-image-box group relative mb-6 flex aspect-[16/10] max-h-[44vh] w-full items-center justify-center overflow-hidden rounded-xl border border-line bg-surface max-[968px]:max-h-none"><div class="pattern-bg"></div><img class="z-[2] block h-full w-full object-cover transition-transform duration-[400ms] group-hover:scale-[1.03]" src="https://github.com/user-attachments/assets/ce214616-8f2a-4017-b9db-001c818d4cc0" alt="JuGa 실시간 주식 차트 화면" loading="lazy" decoding="async" sc-camel-on-error="{{ hideImg }}" sc-camel-on-load="{{ remeasure }}"><svg class="absolute z-[1] h-[70px] w-[70px] text-accent [filter:drop-shadow(0_0_8px_var(--accent-glow))]" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
+<h3 class="mt-0 mb-2 break-keep text-[1.8rem] font-extrabold text-main">JuGa (주식 모의 투자 서비스)</h3>
+<span class="mb-4 text-[.95rem] text-muted">Real-time Stock Simulation Service (Team Project)</span>
+<div class="mb-6 flex flex-wrap gap-2"><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">TypeScript</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">React</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Canvas API</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Socket.io</span><span class="rounded border border-white/[.08] bg-white/5 px-[.6rem] py-[.2rem] font-mono text-[.8rem] text-muted">Shared Worker</span></div>
+<div class="flex gap-4"><a href="https://github.com/boostcampwm-2024/web16-JuGa" target="_blank" class="inline-flex items-center gap-[.4rem] rounded-md border border-accent/30 bg-[var(--accent-soft)] px-[.8rem] py-[.4rem] font-mono text-[.85rem] text-accent no-underline transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-[0_0_10px_var(--accent-glow)]">GitHub</a><a href="https://velog.io/@dannysir/Shared-Worker%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%86%8C%EC%BC%93-%EC%97%B0%EA%B2%B0-%EA%B4%80%EB%A6%AC" target="_blank" class="inline-flex items-center gap-[.4rem] rounded-md border border-accent/30 bg-[var(--accent-soft)] px-[.8rem] py-[.4rem] font-mono text-[.85rem] text-accent no-underline transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent hover:shadow-[0_0_10px_var(--accent-glow)]">Optimization Log</a></div>
 </div>
-<div class="project-details"><div class="details-inner">
-<div class="detail-block"><h4 class="detail-label">Overview</h4><div class="detail-content">네이버 부스트캠프 최종 팀 프로젝트로 진행한 <strong class="em">실시간 주식 모의 투자 서비스</strong>입니다. 외부 차트 라이브러리에 의존하지 않고 시각화와 실시간 데이터 처리를 직접 구현하는 데 집중했습니다.</div></div>
-<div class="detail-block"><h4 class="detail-label">Canvas 주식 차트 직접 구현</h4><div class="detail-content"><ul class="detail-list"><li>외부 라이브러리 없이 <span class="mono">Canvas API</span>로 실시간 주식 차트를 직접 구현했습니다.</li><li>대량의 시세 데이터 렌더링을 <span class="mono">requestAnimationFrame</span> 기반으로 처리해 부드러운 인터랙션을 유지했습니다.</li></ul></div></div>
-<div class="detail-block"><h4 class="detail-label">경험의 확장 — 프로젝트 종료 후 웹소켓 연결 최적화</h4><div class="detail-content">JuGa에서 여러 탭 사용 시 탭마다 웹소켓이 중복 연결되는 문제를 발견했지만 기간 내 해결이 어려웠고, <strong class="em">종료 후 타 프로젝트 리팩토링에 자발적으로 참여</strong>해 최적화를 완수했습니다.<ul class="detail-list"><li>기존 소켓 아키텍처를 분석하고 Manager 계층을 추가해, 기존 코드를 유지한 채 <span class="mono">Shared Worker</span> 기반 구조로 점진적으로 전환했습니다.</li><li>Message 기반 Worker를 위한 이벤트 필터링을 추가하고, 연결 전 이벤트 처리 오류는 <span class="mono">waitingQueue</span> 도입으로 해결했습니다.</li><li>N개의 탭에서 발생하는 N개의 웹소켓 연결을 <strong class="em">1개로 최적화</strong>했습니다.</li></ul></div></div>
-<div class="detail-block"><h4 class="detail-label">한글 검색 &amp; Composition 이벤트 이슈 해결</h4><div class="detail-content"><ul class="detail-list"><li>한글 IME 입력 시 크롬·사파리 간 <span class="mono">composition</span> 이벤트 동작 차이로 발생하는 검색 중복 실행 문제를 디버깅하고 해결했습니다.</li></ul></div></div>
+<div class="project-details relative min-w-0 flex-[1.2]"><div class="details-inner h-full">
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">Overview</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted">네이버 부스트캠프 최종 팀 프로젝트로 진행한 <strong class="font-semibold text-main">실시간 주식 모의 투자 서비스</strong>입니다. 외부 차트 라이브러리에 의존하지 않고 시각화와 실시간 데이터 처리를 직접 구현하는 데 집중했습니다.</div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">Canvas 주식 차트 직접 구현</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>외부 라이브러리 없이 <span class="chip">Canvas API</span>로 실시간 주식 차트를 직접 구현했습니다.</li><li>대량의 시세 데이터 렌더링을 <span class="chip">requestAnimationFrame</span> 기반으로 처리해 부드러운 인터랙션을 유지했습니다.</li></ul></div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">경험의 확장 — 프로젝트 종료 후 웹소켓 연결 최적화</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted">JuGa에서 여러 탭 사용 시 탭마다 웹소켓이 중복 연결되는 문제를 발견했지만 기간 내 해결이 어려웠고, <strong class="font-semibold text-main">종료 후 타 프로젝트 리팩토링에 자발적으로 참여</strong>해 최적화를 완수했습니다.<ul class="detail-list"><li>기존 소켓 아키텍처를 분석하고 Manager 계층을 추가해, 기존 코드를 유지한 채 <span class="chip">Shared Worker</span> 기반 구조로 점진적으로 전환했습니다.</li><li>Message 기반 Worker를 위한 이벤트 필터링을 추가하고, 연결 전 이벤트 처리 오류는 <span class="chip">waitingQueue</span> 도입으로 해결했습니다.</li><li>N개의 탭에서 발생하는 N개의 웹소켓 연결을 <strong class="font-semibold text-main">1개로 최적화</strong>했습니다.</li></ul></div></div>
+<div class="detail-block"><h4 class="mt-0 mb-3 font-mono text-[.8rem] font-bold uppercase tracking-[2px] text-accent">한글 검색 &amp; Composition 이벤트 이슈 해결</h4><div class="break-keep text-[1.05rem] leading-[1.8] text-muted"><ul class="detail-list"><li>한글 IME 입력 시 크롬·사파리 간 <span class="chip">composition</span> 이벤트 동작 차이로 발생하는 검색 중복 실행 문제를 디버깅하고 해결했습니다.</li></ul></div></div>
 </div></div>
 </div>
 <div class="proj-dots"><sc-for list="{{ dots }}" as="d" hint-placeholder-count="3"><button class="proj-dot" sc-camel-on-click="{{ d.go }}" aria-label="{{ d.label }}" type="button">{{ d.num }}</button></sc-for></div>
 </div>
 </div>
 </section>
-<section id="contact" class="section contact fade-section" data-screen-label="Contact">
-<h2 class="section-title"><span class="title-num">02.</span> Contact</h2>
-<div class="contact-links">
-<a href="tel:010-8934-8471" class="contact-card"><svg class="cicon" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><span class="contact-name">Call Phone</span><span class="contact-val">010-8934-8471</span></a>
-<a href="https://github.com/dannysir" target="_blank" class="contact-card"><svg class="cicon" fill="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path></svg><span class="contact-name">GitHub</span><span class="contact-val">github.com/dannysir</span></a>
-<a href="https://velog.io/@dannysir/posts" target="_blank" class="contact-card"><svg class="cicon" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg><span class="contact-name">Tech Blog</span><span class="contact-val">velog.io/@dannysir</span></a>
+<section id="contact" class="section fade-section mx-auto max-w-[1200px] scroll-mt-[70px] px-8 py-[110px] text-center max-[968px]:px-6 max-[968px]:py-[90px]" data-screen-label="Contact">
+<h2 class="mt-0 mb-12 inline-block border-b border-line pb-4 text-[2.5rem] font-extrabold"><span class="mr-2 text-2xl text-accent">02.</span> Contact</h2>
+<div class="mt-3 flex flex-wrap justify-center gap-6 max-[968px]:flex-col max-[968px]:items-stretch">
+<a href="tel:010-8934-8471" class="group flex min-w-[140px] flex-col items-center gap-3 rounded-xl border border-line bg-surface px-10 py-6 text-main no-underline transition-all duration-300 hover:-translate-y-[5px] hover:border-accent hover:text-main hover:shadow-[0_10px_30px_var(--accent-glow)] max-[968px]:flex-row max-[968px]:justify-between max-[968px]:px-8 max-[968px]:py-[1.2rem]"><svg class="h-7 w-7 text-muted transition-colors duration-300 group-hover:text-accent" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><span class="text-[.95rem] font-medium">Call Phone</span><span class="font-mono text-[.8rem] text-muted">010-8934-8471</span></a>
+<a href="https://github.com/dannysir" target="_blank" class="group flex min-w-[140px] flex-col items-center gap-3 rounded-xl border border-line bg-surface px-10 py-6 text-main no-underline transition-all duration-300 hover:-translate-y-[5px] hover:border-accent hover:text-main hover:shadow-[0_10px_30px_var(--accent-glow)] max-[968px]:flex-row max-[968px]:justify-between max-[968px]:px-8 max-[968px]:py-[1.2rem]"><svg class="h-7 w-7 text-muted transition-colors duration-300 group-hover:text-accent" fill="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.161 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path></svg><span class="text-[.95rem] font-medium">GitHub</span><span class="font-mono text-[.8rem] text-muted">github.com/dannysir</span></a>
+<a href="https://velog.io/@dannysir/posts" target="_blank" class="group flex min-w-[140px] flex-col items-center gap-3 rounded-xl border border-line bg-surface px-10 py-6 text-main no-underline transition-all duration-300 hover:-translate-y-[5px] hover:border-accent hover:text-main hover:shadow-[0_10px_30px_var(--accent-glow)] max-[968px]:flex-row max-[968px]:justify-between max-[968px]:px-8 max-[968px]:py-[1.2rem]"><svg class="h-7 w-7 text-muted transition-colors duration-300 group-hover:text-accent" fill="none" stroke="currentColor" sc-camel-view-box="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg><span class="text-[.95rem] font-medium">Tech Blog</span><span class="font-mono text-[.8rem] text-muted">velog.io/@dannysir</span></a>
 </div>
 </section>
 </main>
-<footer class="site-footer"><p class="m0">© 2026 서산 (Seosan). All rights reserved.</p></footer>
+<footer class="border-t border-line p-10 text-center text-[.9rem] text-muted"><p class="m-0">© 2026 서산 (Seosan). All rights reserved.</p></footer>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#33d6e4&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#33d6e4&quot;,&quot;#00f0ff&quot;,&quot;#8ab4ff&quot;,&quot;#5eead4&quot;],&quot;section&quot;:&quot;Theme&quot;},&quot;scrollPerProject&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:260,&quot;min&quot;:140,&quot;max&quot;:360,&quot;step&quot;:10,&quot;unit&quot;:&quot;vh&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Projects&quot;},&quot;showScrollIndicator&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
 class Component extends DCLogic {
@@ -242,6 +255,10 @@ class Component extends DCLogic {
     const per = this.props.scrollPerProject ?? 260;
     this.track.style.height = (this.slides.length * per) + 'vh';
     this.blocks = this.slides.map((s) => Array.from(s.querySelectorAll('.detail-block')));
+    this.slides.forEach((s) => {
+      const img = s.querySelector('.project-image-box');
+      if (img) s.style.setProperty('--detail-top', img.offsetTop + 'px');
+    });
   }
   update() {
     if (!this.track || !this.slides || !this.slides.length || this.mobile) return;
